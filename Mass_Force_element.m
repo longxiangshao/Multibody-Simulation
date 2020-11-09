@@ -1,7 +1,8 @@
-function [Mass,Force] = Mass_Force_element(r,L,qe,dqe,F,g)
+function [Mass,Force] = Mass_Force_element(r,L,qe,dqe,F,g,me)
 % %求解质量阵与力阵
-rho = 8*10^-6;  %密度 kg/mm^3
-m_tot = pi*r^2*L*rho; %质量
+%rho = 8*10^-6;  %密度 kg/mm^3
+%m_tot = pi*r^2*L*rho; %质量
+m_tot = me;
 r_1_0C = [L/2;0;0];   %i系中质心位置
 theta_1_0 = [	1/2*m_tot*r^2,			0,					0;
 				0,						1/3*m_tot*L^2,		0;

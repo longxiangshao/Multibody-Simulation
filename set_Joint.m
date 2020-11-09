@@ -32,7 +32,7 @@ switch i
 		r = [0;0;0]; %2_r_A0
 		Joint(1) = set_Joit_Parameter(r,q,dq);
 		
-		r = [5000;0;0]; %2_r_A
+		r = [4560;0;0]; %2_r_A
 		Joint(2) = set_Joit_Parameter(r,q,dq);
         
 % 		r = [length_under;0;0]; %2_r_I
@@ -41,79 +41,79 @@ switch i
 		r = [0;0;0]; %3_r_A
 		Joint(1) = set_Joit_Parameter(r,q,dq);
 		
-		r = [1500;0;0]; 
+		r = [3000;0;0]; 
 		Joint(2) = set_Joit_Parameter(r,q,dq);	
 	case 4    %4号杆件节点
 		r = [0;0;0]; 
 		Joint(1) = set_Joit_Parameter(r,q,dq);
 		
-		r = [1500;0;0]; 
+		r = [3000;0;0]; 
 		Joint(2) = set_Joit_Parameter(r,q,dq);	
 	case 5    %5号杆件节点
 		r = [0;0;0];%D
 		Joint(1) = set_Joit_Parameter(r,q,dq);
 		
-		r = [5500;0;0]; %5_r_L
+		r = [4000;0;0]; %5_r_L
 		Joint(2) = set_Joit_Parameter(r,q,dq);
         
-        r = [500;-1000;0]; %5_r_F
+        r = [300;-300;0]; %5_r_F
 		Joint(3) = set_Joit_Parameter(r,q,dq);
         
-        r = [500;0;0]; %5_r_F0
+        r = [300;0;0]; %5_r_F0
 		Joint(4) = set_Joit_Parameter(r,q,dq);
 	case 6   %6号杆件节点
 		r = [0;0;0]; %F
 		Joint(1) = set_Joit_Parameter(r,q,dq);
 		
-		r = [2000;0;0]; %6_r_H
+		r = [1500;0;0]; %6_r_H
 		Joint(2) = set_Joit_Parameter(r,q,dq);
 	case 7   %7号杆件节点
 		r = [0;0;0];%E
 		Joint(1) = set_Joit_Parameter(r,q,dq);
 		
-		r = [1500;0;0]; %H
+		r = [1200;0;0]; %H
 		Joint(2) = set_Joit_Parameter(r,q,dq);
 	case 8   %8号杆件节点
 		r = [0;0;0];
 		Joint(1) = set_Joit_Parameter(r,q,dq);
 		
-		r = [1500;0;0];
+		r = [2500;0;0];
 		Joint(2) = set_Joit_Parameter(r,q,dq);
 	case 9    %9号杆件节点
 		r = [0;0;0];
 		Joint(1) = set_Joit_Parameter(r,q,dq);
 		
-		r = [1500;0;0];
+		r = [2500;0;0];
 		Joint(2) = set_Joit_Parameter(r,q,dq);	
     case 10
         r = [0;0;0]; 
         Joint(1) = set_Joit_Parameter(r,q,dq);
         
-        r = [500 + 7500/(number_AE0+1);0;0]; %D
+        r = [300 + (10000-300)/(number_AE0+1);0;0]; %D
         Joint(2) = set_Joit_Parameter(r,q,dq);
         
-        r = [7500/(number_AE0+1);-1000;0]; %E
+        r = [(10000-300)/(number_AE0+1);-600;0]; %E
         Joint(3) = set_Joit_Parameter(r,q,dq);   
         
-        r = [7500/(number_AE0+1);0;0]; %E0
+        r = [(10000-300)/(number_AE0+1);0;0]; %E0
         Joint(4) = set_Joit_Parameter(r,q,dq);        
     case 11
         r = [0;0;0];%L
         Joint(1) = set_Joit_Parameter(r,q,dq);
         
-        r = [7500/(number_LJ+1);0;0];
+        r = [10000/(number_LJ+1);0;0];
         Joint(2) = set_Joit_Parameter(r,q,dq);
     case 12
         r = [0;0;0];
         Joint(1) = set_Joit_Parameter(r,q,dq);
         
-        r = [7500/(number_AE0+1);0;0];
+        r = [(10000-300)/(number_AE0+1);0;0];
         Joint(2) = set_Joit_Parameter(r,q,dq);
     case 13
         r = [0;0;0];
         Joint(1) = set_Joit_Parameter(r,q,dq);
         
-        r = [7500/(number_LJ+1);0;0];
+        r = [10000/(number_LJ+1);0;0];
         Joint(2) = set_Joit_Parameter(r,q,dq);
 end
 

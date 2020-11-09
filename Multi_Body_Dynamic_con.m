@@ -1,4 +1,4 @@
-function dx = Multi_Body_Dynamic_con(t,x,F,u,r,L,number_AE0,number_LJ) %ode方程
+function dx = Multi_Body_Dynamic_con(t,x,F,u,r,L,number_AE0,number_LJ,m) %ode方程
 q = x(1:numel(x)/2); %54x1
 dq = x(numel(x)/2+1:end); %54x1
 n = numel(q)/6 + 1;  %共10根杆件，算上基架
@@ -16,8 +16,9 @@ for i = 2:n %2到11号杆件
 	
 	re = r(i-1); %i号杆件半径
 	Le = L(i-1); %i号杆件长度
+    me = m(i-1); %i号杆件质量
 	
-	[Body(i).Mass,Body(i).Force] = Mass_Force_element(re,Le,qe,dqe,Fe,g);%调用函数，获取body质量阵,力阵
+	[Body(i).Mass,Body(i).Force] = Mass_Force_element(re,Le,qe,dqe,Fe,g,me);%调用函数，获取body质量阵,力阵
 	
 	Mass([6*(i-2)+1:6*(i-2)+6],[6*(i-2)+1:6*(i-2)+6]) = Body(i).Mass;%转移到全局54x54质量阵
 	Force([6*(i-2)+1:6*(i-2)+6],1) = Body(i).Force;%转移到全局54x1力阵
