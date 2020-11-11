@@ -25,6 +25,8 @@ else
 end
 plot_error(x,t,i,j);
 title("DJ")
+
+plot_velocity_AB0(x,t,n)
 end
 
 function plot_error(x,t,i,j)
@@ -37,4 +39,39 @@ hold on; grid on;
 q_plot10 = x(:,j);
 plot(t,q_plot10');
 legend("soll","ist");
+end
+
+function plot_velocity_AB0(x,t,n)
+figure(3);
+subplot(2,2,1);
+x_A = x(:,7);y_A = x(:,8);x_B0 = x(:,13);y_B0 = x(:,14);
+x_AB0 = x_A - x_B0;y_AB0 = y_A - y_B0;
+s_AB0 = sqrt(x_AB0.*x_AB0 + y_AB0.*y_AB0) - 3000;
+plot(t,s_AB0);
+title("displacement AB0");
+
+subplot(2,2,2);
+v_A_x = x(:,6*n+7);v_A_y = x(:,6*n+8);
+%v_B0_x=x(:,6*n+13);v_B0_y=x(:,6*n+14);
+v_A = sqrt(v_A_x.*v_A_x+v_A_y.*v_A_y);
+%v_B0=sqrt(v_B0_x.*v_B0_x + v_B0_y.*v_B0_y);
+v_AB0 = v_A;
+plot(t,v_AB0)
+title("velocity AB0")
+
+subplot(2,2,3);
+x_L = x(:,43);y_L = x(:,44);x_H = x(:,37);y_H = x(:,38);
+x_LH = x_L - x_H;y_LH = y_L - y_H;
+s_LH = sqrt(x_LH.*x_LH + y_LH.*y_LH) - 2570.992;
+plot(t,s_LH);
+title("displacement LH");
+
+subplot(2,2,4);
+v_L_x = x(:,6*n+43);v_L_y = x(:,6*n+44);
+v_H_x = x(:,6*n+37);v_H_y = x(:,6*n+38);
+v_L = sqrt(v_L_x.*v_L_x + v_L_y.*v_L_y);
+v_H = sqrt(v_H_x.*v_H_x + v_H_y.*v_H_y);
+v_LH = v_L - v_H;
+plot(t,v_LH);
+title("velocity LH");
 end
