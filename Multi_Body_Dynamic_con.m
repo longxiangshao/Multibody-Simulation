@@ -1,4 +1,4 @@
-function dx = Multi_Body_Dynamic_con(t,x,F,u,r,L,number_AE0,number_LJ,m) %ode方程
+function dx = Multi_Body_Dynamic_con(t,x,u,F,r,L,number_AE0,number_LJ,m) %ode方程
 q = x(1:numel(x)/2); %6nx1
 dq = x(numel(x)/2+1:end); %6nx1
 n = numel(q)/6 + 1;  %共10根杆件，算上基架
@@ -31,7 +31,11 @@ end
 
 [g,B,dg,Tau] = add_Constraint(q,dq,Body,number_AE0,number_LJ);%添加约束
 
-u = add_PDcontroller(t,u,q,dq);%控制液压缸的驱动力
+
+%add_PDcontroller(t,q,dq);%控制液压缸的驱动力
+%global u;
+[u] = add_PDcontroller(t,u,q,dq);%控制液压缸的驱动力
+
 
 number = n - 1;
 [~,B_drive] = add_Driving(u,Force,q,r,Body,number); %添加驱动力

@@ -1,8 +1,8 @@
 clear;clc;
 format long; %设置命令行窗口显示格式
-opt=odeset('RelTol',0.1,'AbsTol',5,'MaxStep',5);
-number_AE0 = 10;%给下面那根长杆AE0部分加入几个关节
-number_LJ = 10;%给上面那根长杆FL部分加入几个关节
+opt=odeset('RelTol',1*10^-4,'AbsTol',1*10^-5,'MaxStep',1);
+number_AE0 = 5;%给下面那根长杆AE0部分加入几个关节
+number_LJ = 5;%给上面那根长杆FL部分加入几个关节
 [t_set,x] = Test(opt,number_AE0,number_LJ);
 plot_nodes_postprocessing(x,t_set,number_AE0,number_LJ);
 
@@ -105,16 +105,19 @@ dq = zeros(6*n,1);
 %         0;0;0 %omega10
 % 		];
 %F1 = 0;F2 = 87920*12;F3 = 50240*23;
-F1 = 0;F2 = 1052663;F3 = 1682180; %输入为两个驱动力；单位N
+%F1 = 0;F2 = 182663;F3 = 150180; %输入为两个驱动力；单位N
+F1 = 0;F2 = 1552663;F3 = 1850180; %输入为两个驱动力；单位N
+%F1 = 0;F2 = 0;F3 = 0;
 %p1底盘旋转液压马达压力 p2下部液压系统压力；p3上部液压系统压力
 Q1 = 0;Q2 = 0;Q3 = 0;dQ1 = 0;dQ2 = 0;dQ3 = 0; %流量暂时没有使用
+%global u;
 u = [F1;F2;F3]; 
 F = zeros(n*6,1);
 
 x0 = [q;dq]; %ode状态初始值 12nx1
 
 tic;
-[t_set,x]=ode23tb(@(t,x)Multi_Body_Dynamic_con(t,x,F,u,r,L,number_AE0,number_LJ,m),[0 12],x0,opt);%ode方程求积分
+[t_set,x]=ode23tb(@(t,x)Multi_Body_Dynamic_con(t,x,u,F,r,L,number_AE0,number_LJ,m),[0 50],x0,opt);%ode方程求积分
 
 end
 
