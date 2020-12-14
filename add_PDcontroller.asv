@@ -1,7 +1,7 @@
 function [u] = add_PDcontroller(t,u,q,dq)
 %控制液压缸的驱动力
 F2 = u(2); F3 = u(3);
-kp_AB0 = 1000;kd_AB0 = 4000;
+kp_AB0 = 1200;kd_AB0 = 0;
 %kp = 60000;kd = 1000;
 %下液压缸
 L0_AB0 = 3000; %A与B0之间最初的距离[mm]
@@ -20,7 +20,7 @@ disp(e_d_AB0);
 u(2) = F2 + kp_AB0*e_AB0 + kd_AB0*e_d_AB0;
 %disp(u(2)*10^-4);
 
-kp_LH = 1500;kd_LH = 4000;
+kp_LH = 1500;kd_LH = 0;
 %上液压缸
 L0_LH = 2570.992;
 x_L = q(43);y_L = q(44);x_H = q(37);y_H = q(38);

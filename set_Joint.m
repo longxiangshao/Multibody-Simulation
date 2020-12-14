@@ -116,7 +116,6 @@ switch i
         r = [10000/(number_LJ+1);0;0];
         Joint(2) = set_Joit_Parameter(r,q,dq);
 end
-
 end
 
 function Joint = set_Joit_Parameter(r,q,dq) %注意节点与目标点的区别
@@ -131,5 +130,4 @@ Joint.T_qi_q = eye(6);
 Joint.T_qi_q(1:3,:) = [eye(3),-skew(R*r)];  %由0_v_Q求目标点在广义坐标系里的速度
 Joint.dr = Joint.T_qi_q(1:3,:) * dq; %0_v_目标点
 Joint.omega = omega; %w_目标点
-
 end

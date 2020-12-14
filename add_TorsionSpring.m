@@ -23,7 +23,7 @@ if number_AE0 == 0
     [F_TorSpr(:,1)] = set_Torsion(bodyi,bodyj,q,dq,Body,k_AE0,dr_AE0); %body i和body j之间添加torsion spring
 else
     [F_TorSpr(:,1)] = set_Torsion(2,12,q,dq,Body,k_AE0,dr_AE0);
-    if number_AE0 >= 4 %判断是否使用k_AE0_end
+    if number_AE0 >= 20 %判断是否使用k_AE0_end
         [F_TorSpr(:,2)] = set_Torsion(10,11+number_AE0,q,dq,Body,k_AE0_end,dr_AE0);
     else
         [F_TorSpr(:,2)] = set_Torsion(10,11+number_AE0,q,dq,Body,k_AE0,dr_AE0);
@@ -41,7 +41,7 @@ if number_LJ >= 1
     for i = 1:number_LJ-1
         [F_TorSpr(:,2+number_AE0+1+i)] = set_Torsion(11+number_AE0+i,11+number_AE0+i+1,q,dq,Body,k_LJ,dr_LJ);
     end
-    if number_LJ >= 4 %判断是否使用k_LJ_end
+    if number_LJ >= 20 %判断是否使用k_LJ_end
         [F_TorSpr(:,2+number_AE0+number_LJ)] = set_Torsion(11+number_AE0+number_LJ-1,11+number_AE0+number_LJ,q,dq,Body,k_LJ_end,dr_LJ);
     end
 end
@@ -65,7 +65,7 @@ dphi_i = dqe_i(6);
 dphi_j = dqe_j(6);
 damping =  d * (dphi_i - dphi_j);
 torque_i = torque_i - damping;
-torque_j = torque_j - damping;
+torque_j = torque_j + damping;
 
 Force_i = [[0;0;0];torque_i * [0;0;1]];
 Force_j = [[0;0;0];torque_j * [0;0;1]];

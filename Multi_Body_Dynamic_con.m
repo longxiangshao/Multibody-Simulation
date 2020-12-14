@@ -31,24 +31,18 @@ end
 
 [g,B,dg,Tau] = add_Constraint(q,dq,Body,number_AE0,number_LJ);%添加约束
 
-
-%add_PDcontroller(t,q,dq);%控制液压缸的驱动力
-%global u;
 [u] = add_PDcontroller(t,u,q,dq);%控制液压缸的驱动力
 
-
-number = n - 1;
-[~,B_drive] = add_Driving(u,Force,q,r,Body,number); %添加驱动力
+[Force] = add_Driving(u,Force,q,Body); %添加驱动力
 [F_TorSpr] = add_TorsionSpring(q,dq,Body,number_AE0,number_LJ); %torsion spring
-Force = add_Hydraulic_Effect(q,dq,Force,Body);%添加液压效应；不重要
+Force = add_Hydraulic_Effect(q,Force,Body);%添加液压效应；不重要
 
 %多体动力学求解
 alpha = 100;beta = 1;P = 0*ones(numel(g));%约束补充系数%P惩罚系数为0
-lambda = (B * inv(Mass) * B')\(Tau + 2 * alpha * beta * dg + alpha ^ 2 * g - B * inv(Mass) * (Force - F_TorSpr - B_drive * u + B' * P * g));
-%lamada中有一项也含u
+lambda = (B * inv(Mass) * B')\(-Tau - 2 * alpha * beta * dg - alpha ^ 2 * g - B * inv(Mass) * (Force + F_TorSpr + B' * P * g));
 
-phy = F_TorSpr - Force - B'*lambda - B' * P * g;
-ddq = Mass \(phy + B_drive * u); %需要的动力学方程表达形式
+%lamada中有一项也含u
+ddq = Mass \(Force + F_TorSpr + B'*lambda + B' * P * g);
 % B_drive为确定控制力位置的矩阵
 
 dq_dt = get_dqdt(q,dq);  %J(qe)与qe关系

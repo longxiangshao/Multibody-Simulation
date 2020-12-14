@@ -1,13 +1,13 @@
-function Force = add_Hydraulic_Effect(q,dq,Force,Body)
+function Force = add_Hydraulic_Effect(q,Force,Body)
 n = numel(q) / 6;
 %% 液压影响，液压弹簧阻尼
 k =0;%弹簧系数k--根据需要修改--注意单位
-r0 = 3500;
+r0 = 3000;
 b1 = 3; j1 = 2; b2 = 4; j2 = 2;
 Force = Force - set_Hydraulic_spring(n,r0,b1,j1,b2,j2,Body,k);
 
 k = 0;
-r0 = 2300;
+r0 = 2560;
 b1 = 8; j1 = 2; b2 = 9; j2 = 2;
 Force = Force - set_Hydraulic_spring(n,r0,b1,j1,b2,j2,Body,k);
 %%
